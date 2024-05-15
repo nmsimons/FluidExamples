@@ -20,7 +20,7 @@ export function createUndoRedoStacks(events: ISubscribable<TreeViewEvents>): und
 
 	// Manage the stacks when a new commit is made
 	function onNewCommit(commit: CommitMetadata, getRevertible?: RevertibleFactory): void {
-		if (getRevertible === undefined) {
+		if (getRevertible === undefined || !commit.isLocal) {
 			return;
 		}
 		const revertible = getRevertible();
