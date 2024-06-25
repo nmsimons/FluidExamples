@@ -16,6 +16,9 @@ export function createUndoRedoStacks(events: Listenable<TreeViewEvents>): undoRe
 	// Create arrays to store revertible objects
 	const undoStack: Revertible[] = [];
 	const redoStack: Revertible[] = [];
+
+	// Manage the stacks when a new commit is made
+	function onNewCommit(commit: CommitMetadata, getRevertible?: RevertibleFactory): void {
 		if (getRevertible === undefined) {
 			return;
 		}
